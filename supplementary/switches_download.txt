@@ -10,17 +10,12 @@ nasa_geos_cross_section = True
 ECMWF_prediction = True
 GFS_prediction = True
 
-uwincm_650mbRH_animation = True
-uwincm_boundaryLayer_animation = True
-uwincm_clouds_animation = True
-uwincm_precipitation_animation = True
-uwincm_surfaceWind_animation = True
-
-uutah_precipitation = True
+uwincm_clouds_animation = False
+uwincm_precipitation_animation = False
 uutah_precipitation_animation = True
 ucdavis_precipitation_animation = True
 mpas_precipitation = True
 
 mpas_outlook_day34 = True
 
-UTAH_website = False
+UTAH_website = True

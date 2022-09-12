@@ -71,11 +71,10 @@ Make sure you have downloaded image files and cropped them before starting this.
 
 1. Copy the forecast_template_link.pptx file and rename it. Then open the new file.
 
-2. You will need to set the links working on your personal computer. This might vary from machine to machine, or from one PowerPoint version to another. But in general, here's what you need to do **for each image in the template**:
-- Click on the image and open the **Format picture** panel (Picture Format in top menu var, then Format Pane).
-- Under **Shape Options**, click on **Fill and Line** tab (the one that looks like a paint bucket).
-- Under the **Fill section**, make sure *Picture or texture fill* is chosen, and click on the **Insert ...**. button under *Picture source*. This will open a window where you can search for the image you want to link to.
-- Find the image you want to link (the number at the beginning of the file name is the slide page you should insert them) and highlight it. All images for the ppt are stored in **/figs_final/**.
+2. You will need to insert figures on your personal computer. This might vary from machine to machine, or from one PowerPoint version to another. But in general, here's what you need to do **for each image in the template**:
+- Click on the image and open the **Picture Format** tab (Picture Format in top menu var).
+- Under **Change Picture**, click on **From a file** tab.
+- Choose the figures respectively
 - Click **Insert**.
 
 As you add each new link, the empty figure should be replaced with what it is being linked to. As you go through the file, you will see the file size increase (from <500KB to >60MB).

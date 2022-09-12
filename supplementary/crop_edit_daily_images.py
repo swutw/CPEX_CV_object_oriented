@@ -29,6 +29,11 @@ import subprocess
 import time
 
 
+model_4panel_ul = 'mpas'
+model_4panel_ur = 'uutah'
+model_4panel_dl = 'ucdavis'
+model_4panel_dr = 'mpas'
+
 clearDirectory = False # remove existing files
 readSwitches = True
 processImages = True
@@ -459,6 +464,23 @@ if processImages:
       cmd = ['convert', os.path.join(cropDir,fl), '-resize', '750x500', os.path.join(cropDir,fl)]
       os.system(' '.join(cmd))
 
+
+    current_files = sorted([el for el in all_files if 'uutah_clouds' in el])
+
+    marker_radius = 5
+    for fl in current_files:
+      #cmd = ['convert', os.path.join(saveDir,fl), '-crop', '800x500+0+0', '+repage', os.path.join(cropDir,fl)]
+      cmd = ['cp', os.path.join(saveDir,fl), os.path.join(cropDir,fl)]
+      os.system(' '.join(cmd))
+
+      xPt, yPt = 452, 187
+      cmd = ['convert', os.path.join(cropDir,fl), '-fill', 'black', '-stroke', 'red', '-draw', '\''+'circle '+ str(xPt) + ',' + str(yPt) + ' ' + str(xPt+marker_radius) + ',' + str(yPt+marker_radius) + '\'', os.path.join(cropDir,fl)]
+      os.system(' '.join(cmd))
+
+      cmd = ['convert', os.path.join(cropDir,fl), '-resize', '750x500', os.path.join(cropDir,fl)]
+      os.system(' '.join(cmd))
+
+
   if switches['ucdavis_precipitation_animation']:
     print('   ... Unversity of UCDavis - precipitation - cropping image and adding Sal location.')
     current_files = sorted([el for el in all_files if 'ucdavis_precip' in el])
@@ -768,7 +790,7 @@ if joinSlideAnimations:
         print('... ... The numbers of images for fields do not match.')
 
 
-      animationSteps(cropDir, 'uwincm_joint_clouds_precipitation_day1_anim_', 'uwincm_joint_clouds_precipitation_day1_movie.gif')
+      animationSteps(cropDir, 'uwincm_joint_clouds_precipitation_day1_anim_', 'joint_clouds_precipitation_day1_movie.gif')
 
     if model_day2:
       print('... UWINCM TPW and OLR & precipitation - model day 2.')
@@ -783,16 +805,48 @@ if joinSlideAnimations:
         print('... ... The numbers of images for fields do not match.')
 
 
-      animationSteps(cropDir, 'uwincm_joint_clouds_precipitation_day2_anim_', 'uwincm_joint_clouds_precipitation_day2_movie.gif')
+      animationSteps(cropDir, 'uwincm_joint_clouds_precipitation_day2_anim_', 'joint_clouds_precipitation_day2_movie.gif')
+
+  if switches['UTAH_website']:
+
+    if model_day1:
+      print('... UTAH TPW and OLR & precipitation - model day 1.')
+
+      fls_left = sorted([el for el in os.listdir(cropDir) if 'uutah_clouds_day1_anim' in el])
+      fls_right = sorted([el for el in os.listdir(cropDir) if 'uutah_precip_day1_anim' in el])
+      if len(fls_left) <= len(fls_right):
+        for num, fl in enumerate(fls_left):
+          cmd = ['convert', '+append', os.path.join(cropDir,fl), os.path.join(cropDir,fls_right[num]), os.path.join(cropDir,'uutah_joint_clouds_precipitation_day1_anim_' + '{:02d}'.format(num) + '.jpg')]
+          os.system(' '.join(cmd))
+      else:
+        print('... ... The numbers of images for fields do not match.')
+
+
+      animationSteps(cropDir, 'uutah_joint_clouds_precipitation_day1_anim_', 'joint_clouds_precipitation_day1_movie.gif')
+
+    if model_day2:
+      print('... UTAH TPW and OLR & precipitation - model day 2.')
+
+      fls_left = sorted([el for el in os.listdir(cropDir) if 'uutah_clouds_day2_anim' in el])
+      fls_right = sorted([el for el in os.listdir(cropDir) if 'uutah_precip_day2_anim' in el])
+      if len(fls_left) <= len(fls_right):
+        for num, fl in enumerate(fls_left):
+          cmd = ['convert', '+append', os.path.join(cropDir,fl), os.path.join(cropDir,fls_right[num]), os.path.join(cropDir,'uutah_joint_clouds_precipitation_day2_anim_' + '{:02d}'.format(num) + '.jpg')]
+          os.system(' '.join(cmd))
+      else:
+        print('... ... The numbers of images for fields do not match.')
+
+
+      animationSteps(cropDir, 'uutah_joint_clouds_precipitation_day2_anim_', 'joint_clouds_precipitation_day2_movie.gif')
 
 
   print('Creating joint animations complete.')
 
 
-  model_1 = 'uwincm_precip_day1_anim'
-  model_2 = 'uutah_precip_day1_anim'
-  model_3 = 'ucdavis_precip_day1_anim'
-  model_4 = 'mpas_precip_day1_anim'
+  model_1 = model_4panel_ul+'_precip_day1_anim'
+  model_2 = model_4panel_ur+'_precip_day1_anim'
+  model_3 = model_4panel_dl+'_precip_day1_anim'
+  model_4 = model_4panel_dr+'_precip_day1_anim'
 
   if 'model_4' in locals():
     fls_left = sorted([el for el in os.listdir(cropDir) if model_1 in el])
@@ -818,10 +872,10 @@ if joinSlideAnimations:
 
     animationSteps(cropDir, 'Four_model_joint_anim_day1_', 'Four_model_joint_movie_day1.gif')
 
-  model_1 = 'uwincm_precip_day2_anim'
-  model_2 = 'uutah_precip_day2_anim'
-  model_3 = 'ucdavis_precip_day2_anim'
-  model_4 = 'mpas_precip_day2_anim'
+  model_1 = model_4panel_ul+'_precip_day2_anim'
+  model_2 = model_4panel_ur+'_precip_day2_anim'
+  model_3 = model_4panel_dl+'_precip_day2_anim'
+  model_4 = model_4panel_dr+'_precip_day2_anim'
 
   if 'model_4' in locals():
     fls_left = sorted([el for el in os.listdir(cropDir) if model_1 in el])
@@ -882,10 +936,10 @@ if moveFinalImages:
                     'ECMWF_GFS_midRH_day2.gif',
                     'ECMWF_GFS_midRH_day3.gif',
                     'ECMWF_GFS_mslp_pcpn_day1.gif',
-                    'uwincm_joint_clouds_precipitation_day1_movie.gif',
+                    'joint_clouds_precipitation_day1_movie.gif',
                     'Four_model_joint_movie_day1.gif',
                     'ECMWF_GFS_mslp_pcpn_day2.gif',
-                    'uwincm_joint_clouds_precipitation_day2_movie.gif',
+                    'joint_clouds_precipitation_day2_movie.gif',
                     'Four_model_joint_movie_day2.gif',
                     'ECMWF_GFS_mslp_pcpn_day3.gif',
                     'MPAS_outlook_day3.gif'
@@ -927,10 +981,10 @@ if moveFinalImages:
                     '11_ECMWF_GFS_midRH_day2.gif',
                     '12_ECMWF_GFS_midRH_day3.gif',
                     '14_ECMWF_GFS_mslp_pcpn_day1.gif',
-                    '15_uwincm_joint_clouds_precipitation_day1_movie.gif',
+                    '15_joint_clouds_precipitation_day1_movie.gif',
                     '16_Four_model_joint_day1_movie.gif',
                     '17_ECMWF_GFS_mslp_pcpn_day2.gif',
-                    '18_uwincm_joint_clouds_precipitation_day2_movie.gif',
+                    '18_joint_clouds_precipitation_day2_movie.gif',
                     '19_Four_model_joint_day2_movie.gif',
                     '20_ECMWF_GFS_mslp_pcpn_day3.gif',
                     '21_MPAS_outlook_day3.gif'

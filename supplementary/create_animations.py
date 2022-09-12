@@ -44,10 +44,6 @@ saveDir = os.path.join('.','figs')
 cropDir = os.path.join('.','figs_cropped')
 finDir  = os.path.join('.','figs_final')
 
-fl = open( os.path.join('.','supplementary','list_of_downloaded_files.txt'), 'r')
-wanted_files = fl.readlines()
-wanted_files = [line.rstrip() for line in wanted_files]
-fl.close()
 
 present_files = [fl for fl in os.listdir(saveDir)]
 present_files_animation = [fl for fl in present_files if '_anim_' in fl]
