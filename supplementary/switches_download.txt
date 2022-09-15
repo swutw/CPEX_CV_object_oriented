@@ -11,7 +11,7 @@ ECMWF_prediction = True
 GFS_prediction = True
 
 uwincm_clouds_animation = False
-uwincm_precipitation_animation = False
+uwincm_precipitation_animation = True
 uutah_precipitation_animation = True
 ucdavis_precipitation_animation = True
 mpas_precipitation = True

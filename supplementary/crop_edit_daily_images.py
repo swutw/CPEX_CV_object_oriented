@@ -22,6 +22,7 @@ Updates:
  - 2021-07-26: Added total AOT to files moved to ./figs_final/.
  - 2022-08-20: Changing the highlight point to Sal island
  - 2022-08-27: Adopt to all operating systems
+ - 2022-09-12: Change to object oriented version
 """
 
 import os
@@ -29,7 +30,7 @@ import subprocess
 import time
 
 
-model_4panel_ul = 'mpas'
+model_4panel_ul = 'uwincm'
 model_4panel_ur = 'uutah'
 model_4panel_dl = 'ucdavis'
 model_4panel_dr = 'mpas'
