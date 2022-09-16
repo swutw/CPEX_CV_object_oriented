@@ -50,6 +50,8 @@ downloadImages = True
 
 model_day1 = model_day2 = True
 
+#utah_ini_time = '00'
+utah_ini_time = '12'
 
 forecastDir = os.getcwd()
 saveDir = os.path.join('.','figs')
@@ -408,22 +410,22 @@ if downloadImages:
       vv = 'slp_rain'
       dd = 'd02'
       for frame in range(12):
-        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_12/' + vv + '-' + (forecast_day1+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
+        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_'+utah_ini_time+'/' + vv + '-' + (forecast_day1+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
         dl = downloadLink(url, os.path.join(saveDir,'uutah_precip_day1_anim_' + '{:02d}'.format(frame) + '.png'))
-        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_12/' + vv + '-' + (forecast_day2+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
+        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_'+utah_ini_time+'/' + vv + '-' + (forecast_day2+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
         dl = downloadLink(url, os.path.join(saveDir,'uutah_precip_day2_anim_' + '{:02d}'.format(frame) + '.png'))
         count_good_links += dl
         count_bad_links += (1 - dl)
         status.append(dl)
 
-      print("... Downloading UofUtah model precipitation map from UTAH website.")
+      print("... Downloading UofUtah model clouds map from UTAH website.")
       status = []
       vv = 'tpw_olr'
       dd = 'd02'
       for frame in range(12):
-        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_12/' + vv + '-' + (forecast_day1+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
+        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_'+utah_ini_time+'/' + vv + '-' + (forecast_day1+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
         dl = downloadLink(url, os.path.join(saveDir,'uutah_clouds_day1_anim_' + '{:02d}'.format(frame) + '.png'))
-        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_12/' + vv + '-' + (forecast_day2+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
+        url = 'https://home.chpc.utah.edu/~pu/cpexaw/png/' + today_m.strftime('%Y-%m-%d') + '_'+utah_ini_time+'/' + vv + '-' + (forecast_day2+timedelta(hours=1) + timedelta(hours=2*frame)).strftime('%Y-%m-%d_%H:%M:%S') + '_'+dd+'.png'
         dl = downloadLink(url, os.path.join(saveDir,'uutah_clouds_day2_anim_' + '{:02d}'.format(frame) + '.png'))
         count_good_links += dl
         count_bad_links += (1 - dl)
