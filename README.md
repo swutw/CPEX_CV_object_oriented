@@ -47,7 +47,7 @@ Make sure you have successfully downloaded image/animation files and cropped the
 4. Once the figures are updated, update the header dates and forecaster names in the PowerPoint
 - The dates in the footer of each slide are automatically updated to the current day, so you do not need to update these
 - In slides 3-4, update each figure header’s times (the ones with “(XXZ)” in the title) to reflect the times of the "current" imagery
-    - For the surface analysis plot on slide 3 and MIMIC TPW plot on slide 4, the times can be found in the “./figs” folder on the “NHC_surface_analysis.png” and “MIMIC-TPW_latest.png” images, respectively.  The times for the satellite image can be found in the “./figs_final” folder on the “04_Goes16_Meteosat11_IRC” image in red text in the upper left part of the figure.  There are 2 separate times listed, which should be within around 30 minutes of each other.  Just take the average of these times and put that in the MIMIC TPW header.
+    - For the surface analysis plot on slide 3 and MIMIC TPW plot on slide 4, the times can be found in the _./figs_ folder on the _NHC_surface_analysis.png_ and _MIMIC-TPW_latest.png_ images, respectively.  The times for the satellite image can be found in the _./figs_final_ folder on the _04_Goes16_Meteosat11_IRC_ image in red text in the upper left part of the figure.  There are 2 separate times listed, which should be within around 30 minutes of each other.  Just take the average of these times and put that in the MIMIC TPW header.
     - The times for the other plots on slide 4 can be found on the imagery already in the PowerPoint
 
 5. Right before the final summary slide, copy and paste in Roman’s satellite tracks slides for the current day, day 1, and day 2 (if they’re available)
@@ -63,13 +63,13 @@ Make sure you have successfully downloaded image/animation files and cropped the
 
 1. Per Step 1 in "Steps for automatically downloading the figures", if any of the 3 models' runs are not complete out to the day 2 forecast, open _./supplementary/switches_download.txt_ and change the model's associated switches to False.  Then, go into _./supplementary/crop_edit_daily_images.py_ and set the model's assigned "model_4panel_XX" variable equal a repeat of one of the other model's names (preferably MPAS, unless MPAS is the problem).
  - If the U of Utah WRF model is not finished updating on the UW website, it may be finished updating on its own website (https://home.chpc.utah.edu/~pu/cpexaw/).  If it's finished, then all you need to do is set _uutah_precipitation_animation = False_ and _UTAH_website = False_.  You don't need to edit anything in _./supplementary/crop_edit_daily_images.py_
-    - If the U of Utah WRF 12Z model run isn't finished on either website, then search for "if switches['Utah_website']:" in _./supplementary/download_daily_images_all.py".  In that code block, change the 12 in the two "url" variables to 00.  The script will now download the earlier 00Z Utah model run instead.
+    - If the U of Utah WRF 12Z model run isn't finished on either website, then open _./supplementary/download_daily_images_all.py_ and change ” utah_ini_time = ‘12’ ” to ” utah_ini_time = ‘00’ ”.  You should just have to comment and uncomment these lines, respectively.
     - If both the UWIN-CM and U of Utah WRF models are not working, follow the steps above, and also delete the day 1/2 TPW/Rain joint animation slides from the PowerPoint presentation.
 
 2. KeyError: '.......'
  - If you get a KeyError for an "if switches['......']:" line of code, then set the appropriate switch in _./supplementary/switches_download.txt_ to False.  If the KeyError is for the UWIN-CM, U of Utah WRF, UC-Davis WRF, or NCAR MPAS model, then refer to #1 in Potential Script Errors.
 
-3. If you encounter any other issues that you can't resolve, then message Shun-Nan and Ben together on Slack, and they will do their best to help you.
+3. If you encounter any other issues that you can't resolve, then message Shun-Nan and Ben together on Slack, and they will do their best to help you.  If they are not available, then you will need to figure out a solution.  That may be just using some of the forecast websites directly in your presentation, rather than having their imagery be in a PowerPoint.
 
 -------------------------------------------
 # Steps for manually downloading the figures
